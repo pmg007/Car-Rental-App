@@ -1,5 +1,5 @@
 # README
-
+This project was developed under the course of Object Oriented Design and Development.
 
 -In the cars page, Hit search button on empty search boxes to see the list of all cars.
 
