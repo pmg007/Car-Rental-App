@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cars</h1>
+<br>
+<% if current_user.role != 'customer' %>
+
+  <%= link_to 'ADD NEW CAR', new_car_path,:class=>'btn btn-large btn-primary' %>
+<% end -%>
+<br>
+<br>
+
+
+
+
+<br>
+
+<%= form_tag(cars_path, method: "get") do %>
+    <%= label_tag(:location, "location") %>
+    <%= text_field_tag(:location) %>
+    <%= label_tag(:model, "model") %>
+    <%= text_field_tag(:model) %>
+    <%= label_tag(:manufacturer, "manufacturer") %>
+    <%= text_field_tag(:manufacturer) %>
+    <%= hidden_field_tag(:flag , true) %>
+    <%= submit_tag("Search") %>
+<% end %>
+
+<div class="table-responsive">
+  <table class="table table-striped ">
+
+  <thead>
+  <tr>
+    <th>Model</th>
+    <th>Manufacturer</th>
+    <th>License</th>
+    <th>Rate</th>
+    <th>Location</th>
+    <th>Style</th>
+    <% if current_user.role != 'customer' %>
+    <th>Status</th>
+    <% end -%>
+    <th colspan="5"></th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @cars.each do |car| %>
+    <tr>
+      <td><%= car.model %></td>
+      <td><%= car.manufacturer %></td>
+      <td><%= car.license %></td>
+      <td><%= car.rate %></td>
+      <td><%= car.location %></td>
+      <td><%= car.style %></td>
+      <td><%= car.status %></td>
+      <% if current_user.role == 'customer' && @allow_booking == true %>
+      <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id), data: { confirm: 'Are you sure?' }, :class=>'btn btn-large btn-success' %></td>
+          <% if car.status != 'AVAILABLE'%>
+          <td><%= link_to 'notify_availability', notify_availability_path(car), :class=>'btn btn-large btn-primary'%></td>
+          <% end %>
+      <% end -%>
+      <% if current_user.role != 'customer' %>
+          <td><%= link_to 'Show', car, :class=>'btn btn-large btn-primary'  %></td>
+          <td><%= link_to 'Edit', edit_car_path(car), :class=>'btn btn-large btn-warning' %></td>
+          <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-large btn-danger' %></td>
+          <br>
+      <% end %>
+    </tr>
+
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<%= link_to 'DASHBOARD', home_dashboard_path,:class=>'btn btn-large btn-primary' %>

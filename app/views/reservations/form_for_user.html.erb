@@ -1,0 +1,27 @@
+<% if current_user.role != 'customer'%>
+    <%= form_tag(create_reservation_for_user_path, method: "post") do %>
+        <%= label_tag(:email, "email") %>
+        <%= text_field_tag(:email) %>
+
+    <div class="field">
+      <%= label_tag(:Check_out, "checkout time") %>
+      <%= text_field_tag(:check_out, id: :reservation_checkout, min: DateTime.now, max: Date.today+7 ) %>
+      <%=# form.label :Check_out %>
+      <%= #form.datetime_local_field :checkout, id: :reservation_checkout, min: DateTime.now, max: Date.today+7, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= label_tag(:hours, "hours") %>
+      <%= text_field_tag(:hours ,in: 1..10) %>
+    </div>
+
+    <%if @flag == true %>
+        <%= hidden_field_tag( :car_id, :value => @car )%>
+    <% else %>
+        <%= hidden_field_tag(:car_id, :value => params[:car_id]) %>
+    <%end%>
+    <%= hidden_field_tag( :current, :value => true) %>
+
+      <%= submit_tag("create") %>
+    <% end %>
+<% end %>

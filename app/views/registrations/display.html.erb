@@ -1,0 +1,131 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1>USERS</h1>
+<br>
+<%= link_to 'ADD USER', user_new1_path, :class=>'btn btn-large btn-primary' %>
+<br>
+
+<div class="table-responsive">
+<table class="table table-striped ">
+
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Rental</th>
+      <th>Created At</th>
+      <th>Last Login</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |u| %>
+
+      <% if u.role == 'customer' %>
+        <tr>
+          <td><%= u.id %></td>
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td><%= u.role %></td>
+          <td><%= u.rental %></td>
+          <td><%= u.created_at %></td>
+          <td><%= u.last_sign_in_at %></td>
+          <td><%= link_to 'Show', showuser_path(u), :class=>'btn btn-large btn-primary'  %></td>
+          <td><%= link_to 'Destroy', user_registration_path(u), method: :delete, data: { confirm: 'Are you sure?',:class=>'btn btn-large btn-warning' } %></td>
+          <td><%= link_to 'history', user_history_reservation_path(u) %></td>
+        </tr>
+      <% end -%>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% if current_user.role != 'customer' %>
+<h1>ADMINS</h1>
+
+<div class="table-responsive">
+<table class="table table-striped ">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Rental</th>
+      <th>Created At</th>
+      <th>Last Login</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |u| %>
+      <% if u.role == 'admin' %> 
+        <tr>
+          <td><%= u.id %></td>
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td><%= u.role %></td>
+          <td><%= u.rental %></td>
+          <td><%= u.created_at %></td>
+          <td><%= u.last_sign_in_at %></td>
+          <% if u.id != current_user.id %>
+              <td><%= link_to 'Show', showuser_path(u), :class=>'btn btn-large btn-primary'  %></td>
+          <td><%= link_to 'Destroy', user_registration_path(u), method: :delete, data: { confirm: 'Are you sure?',:class=>'btn btn-large btn-warning' } %></td>
+          <% end -%>
+        </tr>
+      <% end -%>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% end -%>
+
+<% if current_user.role == 'superadmin' %>
+  <h1>SUPERADMINS</h1>
+<div class="table-responsive">
+<table class="table table-striped ">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Rental</th>
+        <th>Created At</th>
+        <th>Last Login</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |u| %>
+      <% if u.role == 'superadmin' %>
+        <tr>
+          <td><%= u.id %></td>
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td><%= u.role %></td>
+          <td><%= u.rental %></td>
+          <td><%= u.created_at %></td>
+          <td><%= u.last_sign_in_at %></td>
+          <% if u.id != current_user.id %>
+              <td><%= link_to 'Show', showuser_path(u), :class=>'btn btn-large btn-primary'  %></td>
+          <% end -%>
+        </tr>
+      <% end -%>
+    <% end %>
+  
+    </tbody>
+
+</table>
+</div>
+<% end -%>
+<br>
+<%= link_to 'DASHBOARD', home_dashboard_path,:class=>'btn btn-large btn-primary' %>
+
+

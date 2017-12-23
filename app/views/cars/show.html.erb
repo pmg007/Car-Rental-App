@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Model:</th>
+          <td><%= @car.model %></td>
+      </tr>
+      <tr>
+        <th>Manufacturer:</th>
+        <td><%= @car.manufacturer %></td>
+      </tr>
+      <tr>
+        <th>License:</th>
+        <td><%= @car.license %></td>
+      </tr>
+      <tr>
+        <th>Rate:</th>
+        <td><%= @car.rate %></td>
+      </tr>
+      <tr>
+        <th>Location:</th>
+        <td><%= @car.location %></td>
+      </tr>
+      <tr>
+        <th>Style:</th>
+        <td><%= @car.style %></td>
+      </tr>
+      <tr>
+        <th>Status:</th>
+        <td><%= @car.status %></td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+
+
+
+
+
+<%= link_to 'Edit', edit_car_path(@car), :class=>'btn btn-large btn-warning' %> 
+<%= link_to 'Back', cars_path, :class=>'btn btn-large btn-primary' %>

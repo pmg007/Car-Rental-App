@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>ID:</strong>
+  <%= @reservation.id %>
+</p>
+
+<p>
+  <strong>USER ID:</strong>
+  <%= @reservation.user_id %>
+</p>
+
+<p>
+  <strong>CAR ID:</strong>
+  <%= @reservation.car_id %>
+</p>
+
+<p>
+  <strong>CHECK OUT:</strong>
+  <%= @reservation.checkout %>
+</p>
+
+<p>
+  <strong>HOURS:</strong>
+  <%= @reservation.hours %>
+</p>
+
+<!-- <p>
+  <strong>CHECK IN:</strong>
+  <%#= @reservation.checkin %>
+</p> -->
+<% if current_user.role != 'customer'%>
+<%= link_to 'Edit', edit_reservation_path(@reservation) %>
+<% end %>
+<%= link_to 'Back', cars_path %>
+
+    

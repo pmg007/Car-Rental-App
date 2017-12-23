@@ -1,0 +1,49 @@
+<h2>Create User</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em><br>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+  <% if current_user.role == 'superadmin' or current_user.role == 'admin' %>
+    <%= f.label :roles %>
+    <%= label_tag(:role_customer, "Customer") %>
+    <%= radio_button_tag(:role, "customer", :checked => true ) %>
+    <%= label_tag(:role_admin, "Admin") %>
+    <%= radio_button_tag(:role, "admin") %>
+  <% end -%>
+  <% if current_user.role == 'superadmin' %>
+    <%= label_tag(:role_superadmin, "Super-Admin") %>
+    <%= radio_button_tag(:role, "superadmin") %>
+  <% end -%>  
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up", :class=>'btn btn-large btn-success' %>
+  </div>
+<% end %>
+
+<%= link_to "BACK", user_display_path %>
+

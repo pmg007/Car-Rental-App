@@ -1,0 +1,68 @@
+<%= form_with(model: car, local: true) do |form| %>
+  <% if car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :model %>
+    <% if params[:suggestion]  %>
+    <%= form.text_field :model, id: :car_model, value: params[:model] %>
+    <% else %>
+    <%= form.text_field :model, id: :car_model%>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manufacturer %>
+    <% if params[:suggestion]  %>
+    <%= form.text_field :manufacturer, id: :car_manufacturer, value: params[:manufacturer]%>
+    <% else %>
+    <%= form.text_field :manufacturer, id: :car_manufacturer %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :license %>
+    <%= form.text_field :license, id: :car_license %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rate %>
+    <%= form.number_field :rate, id: :car_rate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <% if params[:suggestion]  %>
+    <%= form.text_field :location, id: :car_location, value: params[:location] %>
+    <% else %>
+    <%= form.text_field :location, id: :car_location %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :style %>
+    <% if params[:suggestion]  %>
+    <%= form.text_field :style, id: :car_style , value: params[:style] %>
+    <% else %>
+    <%= form.text_field :style, id: :car_style %>
+    <%end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status, id: :car_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

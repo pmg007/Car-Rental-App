@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reservations</h1>
+<br>
+<%= link_to 'NEW RESERVATION', cars_path, :class=>'btn btn-large btn-primary' %>
+<br>
+<div class="table-responsive">
+<table class="table table-striped ">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>USER</th>
+      <th>CAR</th>
+      <th>CHECK-OUT</th>
+      <th>CHECK-IN</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <% @user=User.find_by_id(reservation.user_id) %>
+        <% if @user != nil%>
+        <td><%= reservation.id %></td>
+        <td><%= @user.name %></td>
+        <% @car=Car.find_by_id(reservation.car_id) %>
+        <% if @car != nil%>
+            <td><%= @car.manufacturer + " " + @car.model%></td>
+        <%else %>
+            <td> car not available </td>
+        <%end %>
+        <td><%= reservation.checkout %></td>
+        <td><%= reservation.checkin %></td>
+
+        <td><%= link_to 'Show', reservation, :class=>'btn btn-large btn-success' %></td>
+        <td><%= link_to 'Edit', edit_reservation_path(reservation),:class=>'btn btn-large btn-warning' %></td>
+        <% if current_user != 'customer' && reservation.current == true %>|
+            <td><%= link_to 'checkout for User', checkout_reservation_path(reservation.id), :class=>'btn btn-large btn-success' %></td>
+                <td><%= link_to 'checkin for User', checkin_reservation_path(reservation.id), :class=>'btn btn-large btn-success' %></td>
+                <td><%= link_to 'cancel for User', cancel_reservation_path(reservation.id), :class=>'btn btn-large btn-success' %></td>
+        <% end %>
+            <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<%= link_to 'DASHBOARD', home_dashboard_path, :class=>'btn btn-large btn-primary'%>

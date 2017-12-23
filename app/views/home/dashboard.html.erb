@@ -1,0 +1,24 @@
+<h1> DASHBOARD </h1>
+<%= render 'current_reservation' %>
+
+<% if current_user.role == 'customer' %>
+<h3><%= link_to "Search Cars" , cars_path %></h3>
+<br>
+<h3><%= link_to "Your Past Reservations" , user_history_reservation_path(current_user) %> </h3>
+<br>
+<h3><%= link_to "Suggest A Car" , new_suggestion_path %> </h3>
+<br>
+<% end -%>
+<% if current_user.role != 'customer' %>
+  
+  <h3><%= link_to "Manage Users" , user_display_path %></h3>
+  <br>
+  <h3><%= link_to "Manage Cars" , cars_path %></h3>
+  <br>
+  <h3><%= link_to "Manage Reservations" , reservations_path %></h3>
+  <br>
+  <h3><%= link_to "Manage Suggestions" , suggestions_path %></h3>
+
+
+<% end -%>
+

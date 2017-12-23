@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<% if current_user.role == "customer" %>
+	<p>Your suggestion has been sent to the admin</p>
+<% end -%>
+
+	<tr>
+        <th>Suggestion:</th>
+          <td><%= @suggestion.suggestion %></td>
+      </tr>
+	<tr>
+        <th>Model:</th>
+          <td><%= @suggestion.model %></td>
+      </tr>
+      <tr>
+        <th>Manufacturer:</th>
+        <td><%= @suggestion.manufacturer %></td>
+      </tr>
+      <tr>
+        <th>Location:</th>
+        <td><%= @suggestion.location %></td>
+      </tr>
+      <tr>
+        <th>Style:</th>
+        <td><%= @suggestion.style %></td>
+      </tr>
+
+
+<%= link_to 'Back', suggestions_path %>
+
+<% if current_user.role == "customer" %>
+	<%= link_to 'Dashboard', home_dashboard_path %>
+<% end -%>

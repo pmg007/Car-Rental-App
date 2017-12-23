@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<h1>PROFILE</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Rental</th>
+      <th>Created At</th>
+      <th>Last Login</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @user.id %></td>
+        <td><%= @user.name %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.role %></td>
+        <td><%= @user.rental %></td>
+        <td><%= @user.created_at %></td>
+        <td><%= @user.last_sign_in_at %></td>
+        <td><%= link_to 'Edit', edituser_path(@user) %></td>
+      </tr>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'DASHBOARD', home_dashboard_path %>

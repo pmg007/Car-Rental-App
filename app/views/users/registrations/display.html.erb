@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>USERS</h1>
+<div class="table-responsive">
+<table class="table table-striped ">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Rental</th>
+      <th>Created At</th>
+      <th>Last Login</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td><%= user.rental %></td>
+        <td><%= user.created_at %></td>
+        <td><%= user.last_sign_in_at %></td>
+        <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>s
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<br>
+<%= link_to 'ADD USER', user_new1_path %>
+<br>
+<%= link_to 'DASHBOARD', home_dashboard_path %>

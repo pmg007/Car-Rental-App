@@ -1,0 +1,24 @@
+<%  if current_user.reservations.count != 0 %>
+    <% if current_user.reservations.last != nil%>
+        <% @current_reservation = current_user.reservations.last %>
+        <% if @current_reservation.current %>
+            <% @current_car = Car.find(@current_reservation.car_id)%>
+            <h2> Current Booking </h2>
+            <p>
+              <strong>CAR ID:</strong>
+              <%= @current_car.model %>
+            </p>
+            <p>
+              <strong>CHECK OUT:</strong>
+              <%= @current_reservation.checkout %>
+            </p>
+            <p>
+              <strong>HOURS:</strong>
+              <%= @current_reservation.hours %>
+            </p>
+            <%= link_to "Checkout", checkout_reservation_path(@current_reservation)%>
+            <%= link_to "Cancel booking", cancel_reservation_path(@current_reservation)%>
+            <%= link_to "Checkin", checkin_reservation_path(@current_reservation)%>
+        <%end%>
+    <% end %>
+<%end%>

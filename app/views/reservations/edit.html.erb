@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+<h1>Editing Reservation</h1>
+
+<%= render 'form', reservation: @reservation %>
+
+<%= link_to 'Show', @reservation %>
+<% if current_user.role == 'customer'%>
+<%= link_to 'Back', user_history_reservation_path(current_user) %>
+<% else %>
+    <%= link_to 'Back', reservations_path %>
+<% end %>

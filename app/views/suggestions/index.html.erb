@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Suggestions</h1>
+
+<div class="table-responsive">
+<table class="table table-striped ">
+
+  <thead>
+    <tr>
+      <th>Suggestion</th>
+      <th>Accepted</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @suggestions.each do |suggestion| %>
+      <tr>
+        <td><%= suggestion.suggestion %></td>
+        <td><% if suggestion.accepted == false %>
+              Pending
+            <% else %>
+              Approved
+            <% end -%>
+        </td>
+        <td><%= link_to 'Show', suggestion, :class=>'btn btn-large btn-primary' %></td>
+
+        <td><%= link_to 'approve', approve_suggestion_path(suggestion.id), :class=>'btn btn-large btn-warning' %></td>
+        <% if current_user.role == "superadmin" %>
+        <td><%= link_to 'Destroy', suggestion, method: :delete, data: { confirm: 'Are you sure?' },  :class=>'btn btn-large btn-danger' %></td>
+
+        <% end %>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<%= link_to 'Dashboard', home_dashboard_path, :class=>'btn btn-large btn-primary' %>

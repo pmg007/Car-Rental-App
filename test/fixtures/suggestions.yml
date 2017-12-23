@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  suggestion: MyString
+  accepted: false
+
+two:
+  suggestion: MyString
+  accepted: false

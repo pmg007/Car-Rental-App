@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<h1>Reservations</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>CAR </th>
+    <th>CHECK-OUT</th>
+    <th>CHECK-IN</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @reservations.each do |reservation| %>
+      <tr>
+        <% @car = Car.find_by_id(reservation.car_id) %>
+        <td><%= reservation.id %></td>
+        <% if @car != nil%>
+        <td><%= @car.model %></td>
+        <%else %>
+        <td>  car not available </td>
+        <%end %>
+        <td><%=  reservation.checkout  %></td>
+        <td><%=  reservation.checkin   %></td>
+        <td><%=  link_to 'Show', reservation  %></td>
+        <% if reservation.current == true %>
+            <td>  Current </td>
+        <% end %>
+        <% if current_user.role != 'customer' %>
+        <td><%= link_to 'Edit', edit_reservation_path(reservation),:class=>'btn btn-large btn-warning' %></td>
+            <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'DASHBOARD', home_dashboard_path %>
